@@ -27,6 +27,7 @@ To use the calculator, follow these steps:
 
 ```python
 code = 'x = 4 + e;'
+```
 
 
 # Make sure to modify the code variable to represent the mathematical expression you want to evaluate.
