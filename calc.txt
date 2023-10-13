@@ -1,0 +1,516 @@
+Grammar:
+
+Rule 0     S' -> assignment
+Rule 1     assignment -> IDENTIFIER = expr ;
+Rule 2     expr -> term
+Rule 3     expr -> term - expr
+Rule 4     expr -> term + expr
+Rule 5     term -> factor
+Rule 6     term -> factor !
+Rule 7     term -> factor ^ term
+Rule 8     term -> factor % term
+Rule 9     term -> factor / term
+Rule 10    term -> factor * term
+Rule 11    factor -> ( expr )
+Rule 12    factor -> CONSTANT
+Rule 13    factor -> FUNCTION ( expr )
+Rule 14    factor -> FUNCTION ( term )
+Rule 15    factor -> FUNCTION ( )
+Rule 16    factor -> NUMBER
+
+Terminals, with rules where they appear:
+
+!                    : 6
+%                    : 8
+(                    : 11 13 14 15
+)                    : 11 13 14 15
+*                    : 10
++                    : 4
+-                    : 3
+/                    : 9
+;                    : 1
+=                    : 1
+CONSTANT             : 12
+FUNCTION             : 13 14 15
+IDENTIFIER           : 1
+NUMBER               : 16
+^                    : 7
+error                : 
+
+Nonterminals, with rules where they appear:
+
+assignment           : 0
+expr                 : 1 3 4 11 13
+factor               : 5 6 7 8 9 10
+term                 : 2 3 4 7 8 9 10 14
+
+
+state 0
+
+    (0) S' -> . assignment
+    (1) assignment -> . IDENTIFIER = expr ;
+    IDENTIFIER      shift and go to state 2
+
+    assignment                     shift and go to state 1
+
+state 1
+
+    (0) S' -> assignment .
+
+
+state 2
+
+    (1) assignment -> IDENTIFIER . = expr ;
+    =               shift and go to state 3
+
+
+state 3
+
+    (1) assignment -> IDENTIFIER = . expr ;
+    (2) expr -> . term
+    (3) expr -> . term - expr
+    (4) expr -> . term + expr
+    (5) term -> . factor
+    (6) term -> . factor !
+    (7) term -> . factor ^ term
+    (8) term -> . factor % term
+    (9) term -> . factor / term
+    (10) term -> . factor * term
+    (11) factor -> . ( expr )
+    (12) factor -> . CONSTANT
+    (13) factor -> . FUNCTION ( expr )
+    (14) factor -> . FUNCTION ( term )
+    (15) factor -> . FUNCTION ( )
+    (16) factor -> . NUMBER
+    (               shift and go to state 7
+    CONSTANT        shift and go to state 8
+    FUNCTION        shift and go to state 9
+    NUMBER          shift and go to state 10
+
+    expr                           shift and go to state 4
+    term                           shift and go to state 5
+    factor                         shift and go to state 6
+
+state 4
+
+    (1) assignment -> IDENTIFIER = expr . ;
+    ;               shift and go to state 11
+
+
+state 5
+
+    (2) expr -> term .
+    (3) expr -> term . - expr
+    (4) expr -> term . + expr
+    ;               reduce using rule 2 (expr -> term .)
+    )               reduce using rule 2 (expr -> term .)
+    -               shift and go to state 12
+    +               shift and go to state 13
+
+
+state 6
+
+    (5) term -> factor .
+    (6) term -> factor . !
+    (7) term -> factor . ^ term
+    (8) term -> factor . % term
+    (9) term -> factor . / term
+    (10) term -> factor . * term
+    -               reduce using rule 5 (term -> factor .)
+    +               reduce using rule 5 (term -> factor .)
+    ;               reduce using rule 5 (term -> factor .)
+    )               reduce using rule 5 (term -> factor .)
+    !               shift and go to state 14
+    ^               shift and go to state 15
+    %               shift and go to state 16
+    /               shift and go to state 17
+    *               shift and go to state 18
+
+
+state 7
+
+    (11) factor -> ( . expr )
+    (2) expr -> . term
+    (3) expr -> . term - expr
+    (4) expr -> . term + expr
+    (5) term -> . factor
+    (6) term -> . factor !
+    (7) term -> . factor ^ term
+    (8) term -> . factor % term
+    (9) term -> . factor / term
+    (10) term -> . factor * term
+    (11) factor -> . ( expr )
+    (12) factor -> . CONSTANT
+    (13) factor -> . FUNCTION ( expr )
+    (14) factor -> . FUNCTION ( term )
+    (15) factor -> . FUNCTION ( )
+    (16) factor -> . NUMBER
+    (               shift and go to state 7
+    CONSTANT        shift and go to state 8
+    FUNCTION        shift and go to state 9
+    NUMBER          shift and go to state 10
+
+    expr                           shift and go to state 19
+    term                           shift and go to state 5
+    factor                         shift and go to state 6
+
+state 8
+
+    (12) factor -> CONSTANT .
+    !               reduce using rule 12 (factor -> CONSTANT .)
+    ^               reduce using rule 12 (factor -> CONSTANT .)
+    %               reduce using rule 12 (factor -> CONSTANT .)
+    /               reduce using rule 12 (factor -> CONSTANT .)
+    *               reduce using rule 12 (factor -> CONSTANT .)
+    -               reduce using rule 12 (factor -> CONSTANT .)
+    +               reduce using rule 12 (factor -> CONSTANT .)
+    ;               reduce using rule 12 (factor -> CONSTANT .)
+    )               reduce using rule 12 (factor -> CONSTANT .)
+
+
+state 9
+
+    (13) factor -> FUNCTION . ( expr )
+    (14) factor -> FUNCTION . ( term )
+    (15) factor -> FUNCTION . ( )
+    (               shift and go to state 20
+
+
+state 10
+
+    (16) factor -> NUMBER .
+    !               reduce using rule 16 (factor -> NUMBER .)
+    ^               reduce using rule 16 (factor -> NUMBER .)
+    %               reduce using rule 16 (factor -> NUMBER .)
+    /               reduce using rule 16 (factor -> NUMBER .)
+    *               reduce using rule 16 (factor -> NUMBER .)
+    -               reduce using rule 16 (factor -> NUMBER .)
+    +               reduce using rule 16 (factor -> NUMBER .)
+    ;               reduce using rule 16 (factor -> NUMBER .)
+    )               reduce using rule 16 (factor -> NUMBER .)
+
+
+state 11
+
+    (1) assignment -> IDENTIFIER = expr ; .
+    $end            reduce using rule 1 (assignment -> IDENTIFIER = expr ; .)
+
+
+state 12
+
+    (3) expr -> term - . expr
+    (2) expr -> . term
+    (3) expr -> . term - expr
+    (4) expr -> . term + expr
+    (5) term -> . factor
+    (6) term -> . factor !
+    (7) term -> . factor ^ term
+    (8) term -> . factor % term
+    (9) term -> . factor / term
+    (10) term -> . factor * term
+    (11) factor -> . ( expr )
+    (12) factor -> . CONSTANT
+    (13) factor -> . FUNCTION ( expr )
+    (14) factor -> . FUNCTION ( term )
+    (15) factor -> . FUNCTION ( )
+    (16) factor -> . NUMBER
+    (               shift and go to state 7
+    CONSTANT        shift and go to state 8
+    FUNCTION        shift and go to state 9
+    NUMBER          shift and go to state 10
+
+    term                           shift and go to state 5
+    expr                           shift and go to state 21
+    factor                         shift and go to state 6
+
+state 13
+
+    (4) expr -> term + . expr
+    (2) expr -> . term
+    (3) expr -> . term - expr
+    (4) expr -> . term + expr
+    (5) term -> . factor
+    (6) term -> . factor !
+    (7) term -> . factor ^ term
+    (8) term -> . factor % term
+    (9) term -> . factor / term
+    (10) term -> . factor * term
+    (11) factor -> . ( expr )
+    (12) factor -> . CONSTANT
+    (13) factor -> . FUNCTION ( expr )
+    (14) factor -> . FUNCTION ( term )
+    (15) factor -> . FUNCTION ( )
+    (16) factor -> . NUMBER
+    (               shift and go to state 7
+    CONSTANT        shift and go to state 8
+    FUNCTION        shift and go to state 9
+    NUMBER          shift and go to state 10
+
+    term                           shift and go to state 5
+    expr                           shift and go to state 22
+    factor                         shift and go to state 6
+
+state 14
+
+    (6) term -> factor ! .
+    -               reduce using rule 6 (term -> factor ! .)
+    +               reduce using rule 6 (term -> factor ! .)
+    ;               reduce using rule 6 (term -> factor ! .)
+    )               reduce using rule 6 (term -> factor ! .)
+
+
+state 15
+
+    (7) term -> factor ^ . term
+    (5) term -> . factor
+    (6) term -> . factor !
+    (7) term -> . factor ^ term
+    (8) term -> . factor % term
+    (9) term -> . factor / term
+    (10) term -> . factor * term
+    (11) factor -> . ( expr )
+    (12) factor -> . CONSTANT
+    (13) factor -> . FUNCTION ( expr )
+    (14) factor -> . FUNCTION ( term )
+    (15) factor -> . FUNCTION ( )
+    (16) factor -> . NUMBER
+    (               shift and go to state 7
+    CONSTANT        shift and go to state 8
+    FUNCTION        shift and go to state 9
+    NUMBER          shift and go to state 10
+
+    factor                         shift and go to state 6
+    term                           shift and go to state 23
+
+state 16
+
+    (8) term -> factor % . term
+    (5) term -> . factor
+    (6) term -> . factor !
+    (7) term -> . factor ^ term
+    (8) term -> . factor % term
+    (9) term -> . factor / term
+    (10) term -> . factor * term
+    (11) factor -> . ( expr )
+    (12) factor -> . CONSTANT
+    (13) factor -> . FUNCTION ( expr )
+    (14) factor -> . FUNCTION ( term )
+    (15) factor -> . FUNCTION ( )
+    (16) factor -> . NUMBER
+    (               shift and go to state 7
+    CONSTANT        shift and go to state 8
+    FUNCTION        shift and go to state 9
+    NUMBER          shift and go to state 10
+
+    factor                         shift and go to state 6
+    term                           shift and go to state 24
+
+state 17
+
+    (9) term -> factor / . term
+    (5) term -> . factor
+    (6) term -> . factor !
+    (7) term -> . factor ^ term
+    (8) term -> . factor % term
+    (9) term -> . factor / term
+    (10) term -> . factor * term
+    (11) factor -> . ( expr )
+    (12) factor -> . CONSTANT
+    (13) factor -> . FUNCTION ( expr )
+    (14) factor -> . FUNCTION ( term )
+    (15) factor -> . FUNCTION ( )
+    (16) factor -> . NUMBER
+    (               shift and go to state 7
+    CONSTANT        shift and go to state 8
+    FUNCTION        shift and go to state 9
+    NUMBER          shift and go to state 10
+
+    factor                         shift and go to state 6
+    term                           shift and go to state 25
+
+state 18
+
+    (10) term -> factor * . term
+    (5) term -> . factor
+    (6) term -> . factor !
+    (7) term -> . factor ^ term
+    (8) term -> . factor % term
+    (9) term -> . factor / term
+    (10) term -> . factor * term
+    (11) factor -> . ( expr )
+    (12) factor -> . CONSTANT
+    (13) factor -> . FUNCTION ( expr )
+    (14) factor -> . FUNCTION ( term )
+    (15) factor -> . FUNCTION ( )
+    (16) factor -> . NUMBER
+    (               shift and go to state 7
+    CONSTANT        shift and go to state 8
+    FUNCTION        shift and go to state 9
+    NUMBER          shift and go to state 10
+
+    factor                         shift and go to state 6
+    term                           shift and go to state 26
+
+state 19
+
+    (11) factor -> ( expr . )
+    )               shift and go to state 27
+
+
+state 20
+
+    (13) factor -> FUNCTION ( . expr )
+    (14) factor -> FUNCTION ( . term )
+    (15) factor -> FUNCTION ( . )
+    (2) expr -> . term
+    (3) expr -> . term - expr
+    (4) expr -> . term + expr
+    (5) term -> . factor
+    (6) term -> . factor !
+    (7) term -> . factor ^ term
+    (8) term -> . factor % term
+    (9) term -> . factor / term
+    (10) term -> . factor * term
+    (11) factor -> . ( expr )
+    (12) factor -> . CONSTANT
+    (13) factor -> . FUNCTION ( expr )
+    (14) factor -> . FUNCTION ( term )
+    (15) factor -> . FUNCTION ( )
+    (16) factor -> . NUMBER
+    )               shift and go to state 29
+    (               shift and go to state 7
+    CONSTANT        shift and go to state 8
+    FUNCTION        shift and go to state 9
+    NUMBER          shift and go to state 10
+
+    expr                           shift and go to state 28
+    term                           shift and go to state 30
+    factor                         shift and go to state 6
+
+state 21
+
+    (3) expr -> term - expr .
+    ;               reduce using rule 3 (expr -> term - expr .)
+    )               reduce using rule 3 (expr -> term - expr .)
+
+
+state 22
+
+    (4) expr -> term + expr .
+    ;               reduce using rule 4 (expr -> term + expr .)
+    )               reduce using rule 4 (expr -> term + expr .)
+
+
+state 23
+
+    (7) term -> factor ^ term .
+    -               reduce using rule 7 (term -> factor ^ term .)
+    +               reduce using rule 7 (term -> factor ^ term .)
+    ;               reduce using rule 7 (term -> factor ^ term .)
+    )               reduce using rule 7 (term -> factor ^ term .)
+
+
+state 24
+
+    (8) term -> factor % term .
+    -               reduce using rule 8 (term -> factor % term .)
+    +               reduce using rule 8 (term -> factor % term .)
+    ;               reduce using rule 8 (term -> factor % term .)
+    )               reduce using rule 8 (term -> factor % term .)
+
+
+state 25
+
+    (9) term -> factor / term .
+    -               reduce using rule 9 (term -> factor / term .)
+    +               reduce using rule 9 (term -> factor / term .)
+    ;               reduce using rule 9 (term -> factor / term .)
+    )               reduce using rule 9 (term -> factor / term .)
+
+
+state 26
+
+    (10) term -> factor * term .
+    -               reduce using rule 10 (term -> factor * term .)
+    +               reduce using rule 10 (term -> factor * term .)
+    ;               reduce using rule 10 (term -> factor * term .)
+    )               reduce using rule 10 (term -> factor * term .)
+
+
+state 27
+
+    (11) factor -> ( expr ) .
+    !               reduce using rule 11 (factor -> ( expr ) .)
+    ^               reduce using rule 11 (factor -> ( expr ) .)
+    %               reduce using rule 11 (factor -> ( expr ) .)
+    /               reduce using rule 11 (factor -> ( expr ) .)
+    *               reduce using rule 11 (factor -> ( expr ) .)
+    -               reduce using rule 11 (factor -> ( expr ) .)
+    +               reduce using rule 11 (factor -> ( expr ) .)
+    ;               reduce using rule 11 (factor -> ( expr ) .)
+    )               reduce using rule 11 (factor -> ( expr ) .)
+
+
+state 28
+
+    (13) factor -> FUNCTION ( expr . )
+    )               shift and go to state 31
+
+
+state 29
+
+    (15) factor -> FUNCTION ( ) .
+    !               reduce using rule 15 (factor -> FUNCTION ( ) .)
+    ^               reduce using rule 15 (factor -> FUNCTION ( ) .)
+    %               reduce using rule 15 (factor -> FUNCTION ( ) .)
+    /               reduce using rule 15 (factor -> FUNCTION ( ) .)
+    *               reduce using rule 15 (factor -> FUNCTION ( ) .)
+    -               reduce using rule 15 (factor -> FUNCTION ( ) .)
+    +               reduce using rule 15 (factor -> FUNCTION ( ) .)
+    ;               reduce using rule 15 (factor -> FUNCTION ( ) .)
+    )               reduce using rule 15 (factor -> FUNCTION ( ) .)
+
+
+state 30
+
+    (14) factor -> FUNCTION ( term . )
+    (2) expr -> term .
+    (3) expr -> term . - expr
+    (4) expr -> term . + expr
+  ! shift/reduce conflict for ) resolved as shift
+    )               shift and go to state 32
+    -               shift and go to state 12
+    +               shift and go to state 13
+
+
+state 31
+
+    (13) factor -> FUNCTION ( expr ) .
+    !               reduce using rule 13 (factor -> FUNCTION ( expr ) .)
+    ^               reduce using rule 13 (factor -> FUNCTION ( expr ) .)
+    %               reduce using rule 13 (factor -> FUNCTION ( expr ) .)
+    /               reduce using rule 13 (factor -> FUNCTION ( expr ) .)
+    *               reduce using rule 13 (factor -> FUNCTION ( expr ) .)
+    -               reduce using rule 13 (factor -> FUNCTION ( expr ) .)
+    +               reduce using rule 13 (factor -> FUNCTION ( expr ) .)
+    ;               reduce using rule 13 (factor -> FUNCTION ( expr ) .)
+    )               reduce using rule 13 (factor -> FUNCTION ( expr ) .)
+
+
+state 32
+
+    (14) factor -> FUNCTION ( term ) .
+    !               reduce using rule 14 (factor -> FUNCTION ( term ) .)
+    ^               reduce using rule 14 (factor -> FUNCTION ( term ) .)
+    %               reduce using rule 14 (factor -> FUNCTION ( term ) .)
+    /               reduce using rule 14 (factor -> FUNCTION ( term ) .)
+    *               reduce using rule 14 (factor -> FUNCTION ( term ) .)
+    -               reduce using rule 14 (factor -> FUNCTION ( term ) .)
+    +               reduce using rule 14 (factor -> FUNCTION ( term ) .)
+    ;               reduce using rule 14 (factor -> FUNCTION ( term ) .)
+    )               reduce using rule 14 (factor -> FUNCTION ( term ) .)
+
+
+Conflicts:
+
+shift/reduce conflict for ) in state 30 resolved as shift
