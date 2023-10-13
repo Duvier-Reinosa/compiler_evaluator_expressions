@@ -35,7 +35,7 @@ code = 'x = 4 + e;'
 
 After setting the code variable, you can run the program using a Python interpreter:
 
-```bash
+
 python calc.py
 
 The program will parse the input code, build an AST, evaluate the expression, and print the result to the console.
